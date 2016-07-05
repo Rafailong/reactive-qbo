@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "bluebird": "registry:npm/bluebird#3.3.4+20160622205516",
+    "lodash": "registry:npm/lodash#4.0.0+20160701205107",
+    "request": "registry:npm/request#2.69.0+20160428223725"
+  },
+  "globalDependencies": {
+    "rx.all": "registry:dt/rx.all#2.2.28+20160316155526"
+  }
+}

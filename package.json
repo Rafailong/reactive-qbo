@@ -1,0 +1,53 @@
+{
+  "name": "reactive-qbo",
+  "version": "0.0.0",
+  "description": "Reactive QBO API client.",
+  "scripts": {
+    "test": "npm run build && ./node_modules/.bin/mocha tests/**/*.tests.js --compilers js:babel-core/register",
+    "build": "npm run clean && ./node_modules/.bin/babel src --out-dir lib",
+    "clean": "./node_modules/.bin/trash lib",
+    "generate-docs": "node_modules/.bin/jsdoc src --configure .jsdoc.json --verbose"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/nearbpo/reactive-qbo.git"
+  },
+  "keywords": [
+    "QBO"
+  ],
+  "author": {
+    "name": "Rafael Avila",
+    "email": "ravila@nearbpo.com",
+    "url": "http://rafaavila.me/"
+  },
+  "dependencies": {
+    "bluebird": "3.4.1",
+    "lodash": "4.13.1",
+    "request": "2.72.0",
+    "rx": "4.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "6.10.1",
+    "babel-core": "6.10.4",
+    "babel-preset-es2015": "6.9.0",
+    "chai": "3.5.0",
+    "jsdoc": "^3.4.0",
+    "minami": "^1.1.1",
+    "mocha": "2.5.3",
+    "trash-cli": "1.3.0"
+  },
+  "engines": {
+    "node": "4.4.2",
+    "npm": "2.15.0"
+  },
+  "publishConfig": {
+    "registry": "https://nexus.corpfolder.com/repository/corpfolder-npm/"
+  },
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/nearbpo/reactive-qbo#readme"
+}
