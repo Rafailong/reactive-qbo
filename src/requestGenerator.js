@@ -6,10 +6,13 @@
  * @copyright 2016 Rafailong
  */
 
-import * as Promise from 'bluebird'
+import Promise from 'bluebird'
 import * as _ from 'lodash'
-import * as request from 'request'
-import { v1 as uuidV1 } from 'uuid'
+import request from 'request'
+
+if (process.env.NODE_ENV !== 'production') {
+  require('request-debug')(request)
+}
 
 request.defaults({
   'headers': {
@@ -36,7 +39,6 @@ const generateRequestOpts = (oauth, entity, verb, headers, qs) => {
   }
 
   opts.qs.minorversion = opts.qs.minorversion || 4
-  opts.headers['Request-Id'] = uuidV1()
 
   if (entity !== null) {
     opts.body = entity
@@ -46,12 +48,12 @@ const generateRequestOpts = (oauth, entity, verb, headers, qs) => {
 }
 
 const generateRequest = (url, opts) => {
-  return new Promise((reject, resolve) => {
-    request(opts, function (err, res, body) {
+  return new Promise((resolve, reject) => {
+    request(url, opts, function (err, res, body) {
       if (err ||
           res.statusCode >= 300 ||
-          (_.isObject(body) && body.Fault && body.Fault.Error && body.Fault.Error.length) ||
-          (_.isString(body) && !_.isEmpty(body) && body.indexOf('<') === 0)) {
+          ((_.isObject(body) && body.Fault && body.Fault.Error && body.Fault.Error.length)) ||
+          ((_.isString(body) && !_.isEmpty(body) && body.indexOf('<') === 0))) {
         return reject(err || body)
       }
 
