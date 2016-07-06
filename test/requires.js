@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 global.expect = require('chai').expect
 
 global.QBO_CONSUMER_KEY = 'qyprdUzGWSCOgeetxJHPmB4uMAuLyY'
