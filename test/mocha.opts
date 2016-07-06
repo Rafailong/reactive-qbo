@@ -1,4 +1,5 @@
 --require test/requires
+--timeout 50000
 --reporter spec
 --ui bdd
 -G
