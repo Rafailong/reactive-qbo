@@ -17,8 +17,6 @@ request.defaults({
   }
 })
 
-const V3_ENDPOINT_BASE_URL = 'https://sandbox-quickbooks.api.intuit.com/v3/company/'
-
 const formOAuth = (consumerKey, consumerSecret, token, tokenSecret) => {
   return {
     'token': token,
@@ -65,21 +63,22 @@ const generateRequest = (url, opts) => {
 /**
  * Function that is exported as the complete module.
  *
- * @param {any} consumerKey OAuth consumer key.
- * @param {any} consumerSecret OAuth consumer secret.
- * @param {any} token OAuth token.
- * @param {any} tokenSecret OAuth token secret.
- * @param {any} realmId The realmId of the OAuth startegy.
- * @param {any} entity A URL part like Customers
- * @param {any} verb The HTTP verb.
- * @param {any} headers The headers of the request.
- * @param {any} qs A key-value hashs that will be added as query string.
- * @param {any} [ops={}] Options for the request.
+ * @param {String} baseURI Base URL
+ * @param {String} consumerKey OAuth consumer key.
+ * @param {String} consumerSecret OAuth consumer secret.
+ * @param {String} token OAuth token.
+ * @param {String} tokenSecret OAuth token secret.
+ * @param {String} realmId The realmId of the OAuth startegy.
+ * @param {String} entity A URL part like Customers
+ * @param {String} verb The HTTP verb.
+ * @param {Object} headers The headers of the request.
+ * @param {Object} qs A key-value hashs that will be added as query string.
+ * @param {Object} [ops={}] Options for the request.
  * @returns {Promise} The promise of the request.
  */
-const generate = (consumerKey, consumerSecret, token, tokenSecret, realmId, entity, verb, headers, qs, ops = {}) => {
+const generate = (baseURI, consumerKey, consumerSecret, token, tokenSecret, realmId, entity, verb, headers, qs, ops = {}) => {
   const uri = ops.uri || ''
-  const url = V3_ENDPOINT_BASE_URL + realmId + uri
+  const url = baseURI + realmId + uri
   const oauth = formOAuth(consumerKey, consumerSecret, token, tokenSecret)
   const requestOpts = generateRequestOpts(oauth, entity, realmId, verb, headers, qs)
   return generateRequest(url, requestOpts)
