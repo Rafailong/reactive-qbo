@@ -21,5 +21,13 @@
             "error",
             "never"
         ]
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "experimentalObjectRestSpread"  : true,
+        "ecmaFeatures": {
+            "jsx": true
+        }
     }
 }
