@@ -26,7 +26,7 @@ const PAGE_SIZE = 1000
  */
 const count = _.curry((req, entity) => {
   const qs = { 'query': `select count(*) from ${entity}` }
-  return Rx.Observable.fromPromise(req(entity, 'GET', { 'Accept': 'application/json' }, qs, {}))
+  return Rx.Observable.fromPromise(req(entity, 'GET', { 'Accept': 'application/json' }, qs, {'uri': '/query'}))
 })
 
 /**
