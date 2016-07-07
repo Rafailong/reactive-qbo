@@ -12,7 +12,7 @@ describe('requestGenerator', () => {
   })
 
   it('should request Company information', (done) => {
-    const uri = `companyinfo/${global.REALM_ID}`
+    const uri = `/companyinfo/${global.REALM_ID}`
     req('companyinfo', 'GET', {}, {}, {uri})
       .then((data) => {
         expect(data).to.not.be.null
