@@ -36,7 +36,8 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
   return {
     'countCustomers': () => ops.count('Customer'),
     'findCustomer': (id) => ops.fetchById('customer', id),
-    'fetchCustomers': () => ops.fetchAll('Customer')
+    'fetchCustomers': () => ops.fetchAll('Customer'),
+    'createCustomer': (customer) => ops.create('Customer', customer)
   }
 }
 
