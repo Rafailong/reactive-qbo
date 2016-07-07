@@ -81,10 +81,26 @@ const fetchPage = (req, entity, startPosition, maxResult) => {
   return req(entity, 'GET', { 'Accept': 'application/json' }, {query}, {'uri': '/query'})
 }
 
+
+/**
+ * Return a Observable that will return as a single
+ * element the result of the POST request to create
+ * the object.
+ *
+ * @param {String} entity A part of the URL like Customers
+ * @param {Object} body The object to create
+ * @returns {Observable}
+ */
+const create = _.curry((req, entity, body) => {
+  const uri = `/${entity.toLowerCase()}`
+  return Rx.Observable.fromPromise(req(entity, 'POST', { }, null, {uri, body}))
+})
+
 module.exports = (req, pageSize = 1000) => {
   return {
     'count': count(req),
     'fetchById': fetchById(req),
-    'fetchAll': fetchAll(req, pageSize)
+    'fetchAll': fetchAll(req, pageSize),
+    'create': create(req)
   }
 }
