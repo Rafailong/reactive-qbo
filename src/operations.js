@@ -10,13 +10,6 @@ import * as _ from 'lodash'
 import * as Rx from 'rxjs'
 
 /**
- * Page size.
- *
- * @access private
- */
-const PAGE_SIZE = 1000
-
-/**
  * Return a Observable that will return as a single
  * element the result of a count query to the specified entity of
  * QBO API.
@@ -50,10 +43,10 @@ const fetchById = _.curry((req, entity, id) => {
  * @param {String} entity A part of the URL like Customers
  * @returns {Observable}
  */
-const fetchAll = _.curry((req, entity) => {
+const fetchAll = _.curry((req, pageSize, entity) => {
   const fP = fetchPage(req, entity)
   return count(req, entity)
-    .map(buildPages)
+    .map(_.partial(buildPages, pageSize))
     .flatMap(Rx.Observable.fromArray)
     .flatMap((page) => {
       const {startPosition, maxResult} = page
@@ -61,18 +54,18 @@ const fetchAll = _.curry((req, entity) => {
     })
 })
 
-const buildPages = (count) => {
+const buildPages = (pageSize, count) => {
   let pages = []
-  const numberOfPages = Math.floor(count / PAGE_SIZE)
-  const left = count % PAGE_SIZE
+  const numberOfPages = Math.floor(count / pageSize)
+  const left = count % pageSize
 
   if (numberOfPages <= 1) {
     pages.push({'startPosition': 1, 'maxReult': count})
   }
 
   for (let index = 0; index < numberOfPages; index++) {
-    let startPosition = (index * PAGE_SIZE) + 1
-    let maxResult = (index + 1) * PAGE_SIZE
+    let startPosition = (index * pageSize) + 1
+    let maxResult = (index + 1) * pageSize
     pages.push({startPosition, maxResult})
   }
 
@@ -88,10 +81,10 @@ const fetchPage = (req, entity, startPosition, maxResult) => {
   return Rx.Observable.fromPromise(req(entity, 'GET', { 'Accept': 'application/json' }, {query}, {}))
 }
 
-module.exports = (req) => {
+module.exports = (req, pageSize = 1000) => {
   return {
     'count': count(req),
     'fetchById': fetchById(req),
-    'fetchAll': fetchAll(req)
+    'fetchAll': fetchAll(req, pageSize)
   }
 }
