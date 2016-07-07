@@ -7,7 +7,7 @@
  */
 
 import * as _ from 'lodash/fp'
-import * as Rx from 'rxjs'
+import * as Rx from 'rx'
 
 /**
  * Return a Observable that will return as a single
