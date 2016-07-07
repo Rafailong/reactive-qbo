@@ -8,6 +8,7 @@
 
 import * as _ from 'lodash/fp'
 import * as Rx from 'rx'
+import util from 'util'
 
 /**
  * Return a Observable that will return as a single
@@ -69,7 +70,7 @@ const buildPages = (pageSize, count) => {
     pages.push({startPosition, maxResult})
   }
 
-  if(left > 0) {
+  if (left > 0) {
     pages.push({'startPosition': count - left + 1, 'maxResult': count})
   }
 
@@ -80,7 +81,6 @@ const fetchPage = (req, entity, startPosition, maxResult) => {
   const query = `SELECT * FROM ${entity} STARTPOSITION ${startPosition} MAXRESULTS ${maxResult}`
   return req(entity, 'GET', { 'Accept': 'application/json' }, {query}, {'uri': '/query'})
 }
-
 
 /**
  * Return a Observable that will return as a single
@@ -96,11 +96,47 @@ const create = _.curry((req, entity, body) => {
   return Rx.Observable.fromPromise(req(entity, 'POST', { }, null, {uri, body}))
 })
 
+/**
+ * Return a Observable that will return as a single
+ * element the result of the POST request to update
+ * the object.
+ *
+ * @param {String} entity A part of the URL like Customers
+ * @param {Object} body The object to create. Must contains a Id and a SyncToken.
+ * @returns
+ */
+const update = _.curry((req, entity, body) => {
+  if (_.isUndefined(body.Id) ||
+    _.isEmpty(body.Id + '') ||
+    _.isUndefined(body.SyncToken) ||
+    _.isEmpty(body.SyncToken + '')) {
+    if (entity !== 'exchangerate') {
+      const err = new Error(entity + ' must contain Id and SyncToken fields: ' +
+        util.inspect(body, {showHidden: false, depth: null}))
+      return Rx.Observable.throw(err)
+    }
+  }
+
+  if (!body.hasOwnProperty('sparse')) {
+    body.sparse = true
+  }
+
+  const uri = `/${entity.toLowerCase()}?operation=update`
+  let opts = {uri}
+  if (body.void && body.void.toString() === 'true') {
+    opts.qs = { include: 'void' }
+    delete body.void
+  }
+  opts.body = body
+  return Rx.Observable.fromPromise(req(entity, 'POST', null, null, opts))
+})
+
 module.exports = (req, pageSize = 1000) => {
   return {
     'count': count(req),
     'fetchById': fetchById(req),
     'fetchAll': fetchAll(req, pageSize),
-    'create': create(req)
+    'create': create(req),
+    'update': update(req)
   }
 }
