@@ -33,12 +33,26 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
   const baseURI = useSandbox ? V3_ENDPOINT_BASE_URL : V3_ENDPOINT_BASE_URL.replace('sandbox-', '')
   const r = requestGenerator.generate(baseURI, consumerKey, consumerSecret, token, tokenSecret, realmId) // left 'Customer', 'GET', { 'Accept': 'application/json' }
   const ops = operations(r)
+
+  const gCF = (type) => ops.create(type)
+  const gUF = (type) => ops.update(type)
+  const gFX = (type) => ops.fetchById(type)
+  const gFA = (type) => ops.fetchAll(type)
+
   return {
+    // Accont
+    'findAccount': gFX('account'),
+    'createAccount': gCF('account'),
+    'updateAccount': gUF('account'),
+    'fetchAccounts': gFA('account'),
+    'countAccounts': () => ops.count('Account'),
+
+    // customer
+    'findCustomer': gFX('customer'),
+    'createCustomer': gCF('Customer'),
+    'updateCustomer': gUF('Customer'),
+    'fetchCustomers': gFA('Customer'),
     'countCustomers': () => ops.count('Customer'),
-    'fetchCustomers': () => ops.fetchAll('Customer'),
-    'findCustomer': (id) => ops.fetchById('customer', id),
-    'createCustomer': (customer) => ops.create('Customer', customer),
-    'updateCustomer': (customer) => ops.update('Customer', customer)
   }
 }
 
