@@ -5,6 +5,7 @@
     "request": "registry:npm/request#2.69.0+20160428223725"
   },
   "globalDependencies": {
+    "faker": "registry:dt/faker#0.0.0+20160406111603",
     "rx.all": "registry:dt/rx.all#2.2.28+20160316155526"
   }
 }
