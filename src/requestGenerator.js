@@ -29,13 +29,17 @@ const formOAuth = (consumerKey, consumerSecret, token, tokenSecret) => {
   }
 }
 
-const generateRequestOpts = (oauth, entity, verb, headers, qs) => {
+const generateRequestOpts = (oauth, entity, verb, headers, qs, body) => {
   let opts = {
     'verb': verb,
     'qs': qs || {},
     'headers': headers || {},
     'oauth': oauth,
     'json': true
+  }
+
+  if (verb === 'PUT' || verb === 'POST') {
+    opts.body = body
   }
 
   opts.qs.minorversion = opts.qs.minorversion || 4
@@ -80,9 +84,11 @@ const generateRequest = (url, opts) => {
  */
 const generate = (baseURI, consumerKey, consumerSecret, token, tokenSecret, realmId, entity, verb, headers, qs, ops = {}) => {
   const uri = ops.uri || ''
+  const body = ops.body || {}
+  const v = verb.toLocaleUpperCase()
   const url = baseURI + realmId + uri
   const oauth = formOAuth(consumerKey, consumerSecret, token, tokenSecret)
-  const requestOpts = generateRequestOpts(oauth, entity, verb, headers, qs)
+  const requestOpts = generateRequestOpts(oauth, entity, v, headers, qs, body)
   return generateRequest(url, requestOpts)
 }
 
