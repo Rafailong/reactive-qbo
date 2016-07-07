@@ -39,7 +39,7 @@ const count = _.curry((req, entity) => {
  * @returns {Observable}
  */
 const fetchById = _.curry((req, entity, id) => {
-  const uri = '/' + id
+  const uri = `/${entity.toLowerCase()}/${id}`
   return Rx.Observable.fromPromise(req(entity, 'GET', { 'Accept': 'application/json' }, {}, {uri}))
 })
 
