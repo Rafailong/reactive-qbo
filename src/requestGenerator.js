@@ -82,7 +82,7 @@ const generate = (baseURI, consumerKey, consumerSecret, token, tokenSecret, real
   const uri = ops.uri || ''
   const url = baseURI + realmId + uri
   const oauth = formOAuth(consumerKey, consumerSecret, token, tokenSecret)
-  const requestOpts = generateRequestOpts(oauth, entity, realmId, verb, headers, qs)
+  const requestOpts = generateRequestOpts(oauth, entity, verb, headers, qs)
   return generateRequest(url, requestOpts)
 }
 
