@@ -4,6 +4,7 @@ import requestGenerator from '../lib/requestGenerator'
 
 describe('operations.count', () => {
   let req
+  let countObs
 
   before(() => {
     expect(requestGenerator).to.be.a.Object
@@ -15,11 +16,14 @@ describe('operations.count', () => {
     req = requestGenerator.generate(global.BASE_URL, global.QBO_CONSUMER_KEY, global.QBO_CONSUMER_SECRETE, global.TOKEN, global.TOKEN_SECRET, global.REALM_ID)
   })
 
-  it('should count customers', (done) => {
+  beforeEach(() => {
     const countOp = operationsGenerator(req).count
     expect(countOp).to.be.a.Funtion
 
-    const countObs = countOp('Customer')
+    countObs = countOp('Customer')
+  })
+
+  it('should count customers', (done) => {
     countObs.subscribe(
       (data) => {
         expect(get(data, 'QueryResponse')).to.be.a.Object
@@ -28,5 +32,16 @@ describe('operations.count', () => {
       },
       done // on error
     )
+  })
+
+  it('should count customers, extend the observable to get only the count value', (done) => {
+    countObs
+      .map((data) => get(data, 'QueryResponse.totalCount'))
+      .subscribe(
+        (count) => {
+          expect(count).to.be.a.Number
+          done()
+        },
+        done) // on error
   })
 })
