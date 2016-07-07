@@ -6,7 +6,7 @@
  * @copyright 2016 Rafailong
  */
 
-import * as _ from 'lodash'
+import * as _ from 'lodash/fp'
 import * as Rx from 'rxjs'
 
 /**
@@ -44,13 +44,13 @@ const fetchById = _.curry((req, entity, id) => {
  * @returns {Observable}
  */
 const fetchAll = _.curry((req, pageSize, entity) => {
-  const fP = fetchPage(req, entity)
   return count(req, entity)
-    .map(_.partial(buildPages, pageSize))
-    .flatMap(Rx.Observable.fromArray)
+    .map((data) => _.get('QueryResponse.totalCount', data))
+    .map((num) => buildPages(pageSize, num))
+    .flatMap((pages) => Rx.Observable.from(pages))
     .flatMap((page) => {
       const {startPosition, maxResult} = page
-      return fP(startPosition, maxResult)
+      return fetchPage(req, entity, startPosition, maxResult)
     })
 })
 
@@ -70,15 +70,15 @@ const buildPages = (pageSize, count) => {
   }
 
   if(left > 0) {
-    pages.push({'startPosition': count - left, 'maxResult': count})
+    pages.push({'startPosition': count - left + 1, 'maxResult': count})
   }
 
   return pages
 }
 
 const fetchPage = (req, entity, startPosition, maxResult) => {
-  const query = `SELECT * FROM ${entity} STARTPOSITION ${startPosition} MAXRESULT ${maxResult}`
-  return Rx.Observable.fromPromise(req(entity, 'GET', { 'Accept': 'application/json' }, {query}, {}))
+  const query = `SELECT * FROM ${entity} STARTPOSITION ${startPosition} MAXRESULTS ${maxResult}`
+  return req(entity, 'GET', { 'Accept': 'application/json' }, {query}, {'uri': '/query'})
 }
 
 module.exports = (req, pageSize = 1000) => {
