@@ -34,8 +34,9 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
   const r = requestGenerator.generate(baseURI, consumerKey, consumerSecret, token, tokenSecret, realmId) // left 'Customer', 'GET', { 'Accept': 'application/json' }
   const ops = operations(r)
   return {
-    'countCustomer': () => ops.count('Customer'),
-    'findCustomer': (id) => ops.fetchById('customer', id)
+    'countCustomers': () => ops.count('Customer'),
+    'findCustomer': (id) => ops.fetchById('customer', id),
+    'fetchCustomers': () => ops.fetchAll('Customer')
   }
 }
 
