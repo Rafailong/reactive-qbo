@@ -106,6 +106,13 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateEmployee': gUF('employee'),
     'fetchEmployees': gFA('employee'),
     'countEmployees': () => ops.count('Employee'),
+
+    // Estimate
+    'findEstimate': gFX('estimate'),
+    'createEstimate': gCF('estimate'),
+    'updateEstimate': gUF('estimate'),
+    'fetchEstimates': gFA('estimate'),
+    'countEstimates': () => ops.count('Estimate'),
   }
 }
 
