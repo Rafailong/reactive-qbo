@@ -99,6 +99,13 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateDeposit': gUF('deposit'),
     'fetchDeposits': gFA('deposit'),
     'countDeposits': () => ops.count('Deposit'),
+
+    // Employee
+    'findEmployee': gFX('employee'),
+    'createEmployee': gCF('employee'),
+    'updateEmployee': gUF('employee'),
+    'fetchEmployees': gFA('employee'),
+    'countEmployees': () => ops.count('Employee'),
   }
 }
 
