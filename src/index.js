@@ -47,6 +47,13 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'fetchAccounts': gFA('account'),
     'countAccounts': () => ops.count('Account'),
 
+    // Bill
+    'findBill': gFX('bill'),
+    'createBill': gCF('bill'),
+    'updateBill': gUF('bill'),
+    'fetchBills': gFA('bill'),
+    'countBills': () => ops.count('Bill'),
+
     // customer
     'findCustomer': gFX('customer'),
     'createCustomer': gCF('Customer'),
