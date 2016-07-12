@@ -68,6 +68,17 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'fetchClasses': gFA('class'),
     'countClasses': () => ops.count('Class'),
 
+    // CompanyInfo
+    'findCompanyInfo': gFX('companyinfo'),
+    'fetchCompanyInfo': gFA('companyinfo'),
+
+    // CreditMemo
+    'findCreditMemo': gFX('creditmemo'),
+    'createCreditMemo': gCF('creditmemo'),
+    'updateCreditMemo': gUF('creditmemo'),
+    'fetchCreditMemo': gFA('creditmemo'),
+    'countCreditMemo': () => ops.count('CreditMemo'),
+
     // customer
     'findCustomer': gFX('customer'),
     'createCustomer': gCF('Customer'),
