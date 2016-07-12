@@ -162,6 +162,13 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updatePurchaseOrder': gUF('purchaseorder'),
     'fetchPurchaseOrder': gFA('purchaseorder'),
     'countPurchaseOrders': () => ops.count('PurchaseOrder'),
+
+    // RefundReceipt
+    'findRefundReceipt': gFX('refundreceipt'),
+    'createRefundReceipt': gCF('refundreceipt'),
+    'updateRefundReceipt': gUF('refundreceipt'),
+    'fetchRefundReceipts': gFA('refundreceipt'),
+    'countRefundReceipts': () => ops.count('RefundReceipt'),
   }
 }
 
