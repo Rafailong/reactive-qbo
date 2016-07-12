@@ -148,6 +148,13 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updatePaymentMethod': gUF('paymentmethod'),
     'fetchPaymentMethods': gFA('paymentmethod'),
     'countPaymentMethods': () => ops.count('PaymentMethod'),
+
+    // Purchase
+    'findPurchase': gFX('purchase'),
+    'createPurchase': gCF('purchase'),
+    'updatePurchase': gUF('purchase'),
+    'fetchPurchases': gFA('purchase'),
+    'countPurchases': () => ops.count('Purchase'),
   }
 }
 
