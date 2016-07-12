@@ -216,6 +216,13 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateTransfer': gUF('transfer'),
     'fetchTransfer': gFA('transfer'),
     'countTransfer': () => ops.count('Transfer'),
+
+    // Vendor
+    'findVendor': gFX('vendor'),
+    'createVendor': gCF('vendor'),
+    'updateVendor': gUF('vendor'),
+    'fetchVendor': gFA('vendor'),
+    'countVendor': () => ops.count('Vendor'),
   }
 }
 
