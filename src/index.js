@@ -38,6 +38,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
   const gUF = (type) => ops.update(type)
   const gFX = (type) => ops.fetchById(type)
   const gFA = (type) => ops.fetchAll(type)
+  const gDA = (type) => ops.del(type)
 
   return {
     // Accont
@@ -53,6 +54,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateBill': gUF('bill'),
     'fetchBills': gFA('bill'),
     'countBills': () => ops.count('Bill'),
+    'deleteBill': gDA('bill'),
 
     // BillPayment
     'findBillPayment': gFX('billpayment'),
@@ -60,6 +62,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateBillPayment': gUF('billpayment'),
     'fetchBillPayment': gFA('billpayment'),
     'countBillPayments': () => ops.count('BillPayment'),
+    'deleteBillPayments': gDA('billpayment'),
 
     // Class
     'findClass': gFX('class'),
@@ -78,6 +81,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateCreditMemo': gUF('creditmemo'),
     'fetchCreditMemos': gFA('creditmemo'),
     'countCreditMemos': () => ops.count('CreditMemo'),
+    'deleteCreditMemo': gDA('creditmemo'),
 
     // customer
     'findCustomer': gFX('customer'),
@@ -99,6 +103,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateDeposit': gUF('deposit'),
     'fetchDeposits': gFA('deposit'),
     'countDeposits': () => ops.count('Deposit'),
+    'deleteDeposit': gDA('deposit'),
 
     // Employee
     'findEmployee': gFX('employee'),
@@ -113,6 +118,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateEstimate': gUF('estimate'),
     'fetchEstimates': gFA('estimate'),
     'countEstimates': () => ops.count('Estimate'),
+    'deleteEstimate': gDA('estimate'),
 
     // Invoice
     'findInvoice': gFX('invoice'),
@@ -120,6 +126,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateInvoice': gUF('invoice'),
     'fetchInvoices': gFA('invoice'),
     'countInvoices': () => ops.count('Invoice'),
+    'deleteInvoice': gDA('invoice'),
 
     // Item
     'findItem': gFX('item'),
@@ -134,6 +141,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateJournalEntry': gUF('journalentry'),
     'fetchJournalEntries': gFA('journalentry'),
     'countJournalEntries': () => ops.count('JournalEntry'),
+    'deleteJournalEntry': gDA('journalentry'),
 
     // Payment
     'findPayment': gFX('payment'),
@@ -141,6 +149,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updatePayment': gUF('payment'),
     'fetchPayments': gFA('payment'),
     'countPayments': () => ops.count('Payment'),
+    'deletePayment': gDA('payment'),
 
     // PaymentMethod
     'findPaymentMethod': gFX('paymentmethod'),
@@ -155,6 +164,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updatePurchase': gUF('purchase'),
     'fetchPurchases': gFA('purchase'),
     'countPurchases': () => ops.count('Purchase'),
+    'deletePurchase': gDA('purchase'),
 
     // PurchaseOrder
     'findPurchaseOrder': gFX('purchaseorder'),
@@ -162,6 +172,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updatePurchaseOrder': gUF('purchaseorder'),
     'fetchPurchaseOrder': gFA('purchaseorder'),
     'countPurchaseOrders': () => ops.count('PurchaseOrder'),
+    'deletePurchaseOrder': gDA('purchaseorder'),
 
     // RefundReceipt
     'findRefundReceipt': gFX('refundreceipt'),
@@ -169,6 +180,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateRefundReceipt': gUF('refundreceipt'),
     'fetchRefundReceipts': gFA('refundreceipt'),
     'countRefundReceipts': () => ops.count('RefundReceipt'),
+    'deleteRefundReceipt': gDA('refundreceipt'),
 
     // SalesReceipt
     'findSalesReceipt': gFX('salesreceipt'),
@@ -176,6 +188,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateSalesReceipt': gUF('salesreceipt'),
     'fetchSalesReceipts': gFA('salesreceipt'),
     'countSalesReceipts': () => ops.count('SalesReceipt'),
+    'deleteSalesReceipt': gDA('salesreceipt'),
 
     // TaxAgency
     'findTaxAgency': gFX('taxagency'),
@@ -209,6 +222,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateTimeActivity': gUF('timeactivity'),
     'fetchTimeActivities': gFA('timeactivity'),
     'countTimeActivities': () => ops.count('TimeActivity'),
+    'deleteTimeActivity': gDA('timeactivity'),
 
     // Transfer
     'findTransfer': gFX('transfer'),
@@ -230,6 +244,7 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateVendorCredit': gUF('vendorcredit'),
     'fetchVendorCredits': gFA('vendorcredit'),
     'countVendorCredits': () => ops.count('VendorCredit'),
+    'deleteVendorCredit': gDA('vendorcredit')
   }
 }
 
