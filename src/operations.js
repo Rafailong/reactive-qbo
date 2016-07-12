@@ -103,7 +103,7 @@ const create = _.curry((req, entity, body) => {
  *
  * @param {String} entity A part of the URL like Customers
  * @param {Object} body The object to create. Must contains a Id and a SyncToken.
- * @returns
+ * @returns {Observable}
  */
 const update = _.curry((req, entity, body) => {
   if (_.isUndefined(body.Id) ||
@@ -131,12 +131,30 @@ const update = _.curry((req, entity, body) => {
   return Rx.Observable.fromPromise(req(entity, 'POST', null, null, opts))
 })
 
+/**
+ * Return a Observable that will return as a single
+ * element the result of the POST request to delete
+ * the object.
+ *
+ * @param {String} entity A part of the URL like Customers
+ * @param {String} objectId The Identifies in QBO of the object to delete
+ * @param {String} objectSyncToken The sync token of the object to delete
+ * @returns {Observable}
+ */
+const del = _.curry((req, entity, objectId, objectSyncToken) => {
+  const uri = `/${entity.toLowerCase()}?operation=delete`
+  const body = { 'Id': objectId, 'SyncToken': objectSyncToken }
+  let opts = {uri, body}
+  return Rx.Observable.fromPromise(req(entity, 'POST', null, null, opts))
+})
+
 module.exports = (req, pageSize = 1000) => {
   return {
     'count': count(req),
     'fetchById': fetchById(req),
     'fetchAll': fetchAll(req, pageSize),
     'create': create(req),
-    'update': update(req)
+    'update': update(req),
+    'del': del(req)
   }
 }
