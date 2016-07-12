@@ -202,6 +202,13 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateTerm': gUF('term'),
     'fetchTerms': gFA('term'),
     'countTerms': () => ops.count('Term'),
+
+    // TimeActivity
+    'findTimeActivity': gFX('timeactivity'),
+    'createTimeActivity': gCF('timeactivity'),
+    'updateTimeActivity': gUF('timeactivity'),
+    'fetchTimeActivities': gFA('timeactivity'),
+    'countTimeActivities': () => ops.count('TimeActivity'),
   }
 }
 
