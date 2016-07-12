@@ -140,7 +140,14 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'createPayment': gCF('payment'),
     'updatePayment': gUF('payment'),
     'fetchPayments': gFA('payment'),
-    'countPayment': () => ops.count('Payment'),
+    'countPayments': () => ops.count('Payment'),
+
+    // PaymentMethod
+    'findPaymentMethod': gFX('paymentmethod'),
+    'createPaymentMethod': gCF('paymentmethod'),
+    'updatePaymentMethod': gUF('paymentmethod'),
+    'fetchPaymentMethods': gFA('paymentmethod'),
+    'countPaymentMethods': () => ops.count('PaymentMethod'),
   }
 }
 
