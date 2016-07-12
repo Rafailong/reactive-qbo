@@ -76,8 +76,8 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'findCreditMemo': gFX('creditmemo'),
     'createCreditMemo': gCF('creditmemo'),
     'updateCreditMemo': gUF('creditmemo'),
-    'fetchCreditMemo': gFA('creditmemo'),
-    'countCreditMemo': () => ops.count('CreditMemo'),
+    'fetchCreditMemos': gFA('creditmemo'),
+    'countCreditMemos': () => ops.count('CreditMemo'),
 
     // customer
     'findCustomer': gFX('customer'),
@@ -85,6 +85,20 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateCustomer': gUF('Customer'),
     'fetchCustomers': gFA('Customer'),
     'countCustomers': () => ops.count('Customer'),
+
+    // Department
+    'findDepartment': gFX('customer'),
+    'createDepartment': gCF('Customer'),
+    'updateDepartment': gUF('Customer'),
+    'fetchDepartments': gFA('Customer'),
+    'countDepartments': () => ops.count('Department'),
+
+    // Deposit
+    'findDeposit': gFX('deposit'),
+    'createDeposit': gCF('deposit'),
+    'updateDeposit': gUF('deposit'),
+    'fetchDeposits': gFA('deposit'),
+    'countDeposits': () => ops.count('Deposit'),
   }
 }
 
