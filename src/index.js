@@ -155,6 +155,13 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updatePurchase': gUF('purchase'),
     'fetchPurchases': gFA('purchase'),
     'countPurchases': () => ops.count('Purchase'),
+
+    // PurchaseOrder
+    'findPurchaseOrder': gFX('purchaseorder'),
+    'createPurchaseOrder': gCF('purchaseorder'),
+    'updatePurchaseOrder': gUF('purchaseorder'),
+    'fetchPurchaseOrder': gFA('purchaseorder'),
+    'countPurchaseOrders': () => ops.count('PurchaseOrder'),
   }
 }
 
