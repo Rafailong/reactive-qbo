@@ -195,6 +195,13 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
 
     // TaxService
     'createtaxservice': gCF('taxservice'),
+
+    // term
+    'findTerm': gFX('term'),
+    'createTerm': gCF('term'),
+    'updateTerm': gUF('term'),
+    'fetchTerms': gFA('term'),
+    'countTerms': () => ops.count('Term'),
   }
 }
 
