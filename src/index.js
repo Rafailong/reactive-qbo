@@ -134,6 +134,13 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateJournalEntry': gUF('journalentry'),
     'fetchJournalEntries': gFA('journalentry'),
     'countJournalEntries': () => ops.count('JournalEntry'),
+
+    // Payment
+    'findPayment': gFX('payment'),
+    'createPayment': gCF('payment'),
+    'updatePayment': gUF('payment'),
+    'fetchPayments': gFA('payment'),
+    'countPayment': () => ops.count('Payment'),
   }
 }
 
