@@ -187,6 +187,11 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'findTaxCode': gFX('taxcode'),
     'fetchTaxCode': gFA('taxcode'),
     'countTaxCode': () => ops.count('TaxCode'),
+
+    // TaxRate
+    'findTaxRate': gFX('taxrate'),
+    'fetchTaxRate': gFA('taxrate'),
+    'countTaxRate': () => ops.count('TaxRate'),
   }
 }
 
