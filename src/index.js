@@ -113,6 +113,13 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateEstimate': gUF('estimate'),
     'fetchEstimates': gFA('estimate'),
     'countEstimates': () => ops.count('Estimate'),
+
+    // Invoice
+    'findInvoice': gFX('invoice'),
+    'createInvoice': gCF('invoice'),
+    'updateInvoice': gUF('invoice'),
+    'fetchInvoices': gFA('invoice'),
+    'countInvoices': () => ops.count('Invoice'),
   }
 }
 
