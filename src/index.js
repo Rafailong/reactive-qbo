@@ -120,6 +120,20 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateInvoice': gUF('invoice'),
     'fetchInvoices': gFA('invoice'),
     'countInvoices': () => ops.count('Invoice'),
+
+    // Item
+    'findItem': gFX('item'),
+    'createItem': gCF('item'),
+    'updateItem': gUF('item'),
+    'fetchItems': gFA('item'),
+    'countItems': () => ops.count('Item'),
+
+    // JournalEntry
+    'findJournalEntry': gFX('journalentry'),
+    'createJournalEntry': gCF('journalentry'),
+    'updateJournalEntry': gUF('journalentry'),
+    'fetchJournalEntries': gFA('journalentry'),
+    'countJournalEntries': () => ops.count('JournalEntry'),
   }
 }
 
