@@ -180,18 +180,18 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     // TaxAgency
     'findTaxAgency': gFX('taxagency'),
     'createTaxAgency': gCF('taxagency'),
-    'fetchTaxAgency': gFA('taxagency'),
+    'fetchTaxAgencys': gFA('taxagency'),
     'countTaxAgency': () => ops.count('TaxAgency'),
 
     // TaxCode
     'findTaxCode': gFX('taxcode'),
-    'fetchTaxCode': gFA('taxcode'),
-    'countTaxCode': () => ops.count('TaxCode'),
+    'fetchTaxCodes': gFA('taxcode'),
+    'countTaxCodes': () => ops.count('TaxCode'),
 
     // TaxRate
     'findTaxRate': gFX('taxrate'),
-    'fetchTaxRate': gFA('taxrate'),
-    'countTaxRate': () => ops.count('TaxRate'),
+    'fetchTaxRates': gFA('taxrate'),
+    'countTaxRates': () => ops.count('TaxRate'),
 
     // TaxService
     'createtaxservice': gCF('taxservice'),
