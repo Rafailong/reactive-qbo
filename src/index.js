@@ -176,6 +176,12 @@ const generateClient = (consumerKey, consumerSecret, token, tokenSecret, realmId
     'updateSalesReceipt': gUF('salesreceipt'),
     'fetchSalesReceipts': gFA('salesreceipt'),
     'countSalesReceipts': () => ops.count('SalesReceipt'),
+
+    // TaxAgency
+    'findTaxAgency': gFX('taxagency'),
+    'createTaxAgency': gCF('taxagency'),
+    'fetchTaxAgency': gFA('taxagency'),
+    'countTaxAgency': () => ops.count('TaxAgency'),
   }
 }
 
